@@ -305,7 +305,7 @@ public class GUI extends javax.swing.JFrame {
      * @param evt 
      */        
     private void BusquedaPorAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaPorAutorActionPerformed
-        Lista<Autor> Autores = administrador.obtenerTodosLosAutoresOrdenados();
+    Lista<Autor> Autores = administrador.obtenerTodosLosAutoresOrdenados();
     if (Autores == null || Autores.esVacio()) {javax.swing.JOptionPane.showMessageDialog(this, "No hay autores registrados en el sistema", "Sistema Vacio", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         return;
     }
@@ -346,7 +346,15 @@ public class GUI extends javax.swing.JFrame {
                                     ArticuloCientifico articulo = resultados.ObtenerPorIndice(index); 
                                     StringBuilder info = new StringBuilder();
                                     info.append("TITULO: ").append(articulo.getTitulo()).append("\n\n");
-                                    info.append("AUTORES: ").append(articulo.getAutores().toString()).append("\n\n"); 
+                                    info.append("AUTORES: ");
+                                    Lista<String> autores = articulo.getAutores();
+                                    for(int i=0; i<autores.Tamaño(); i++){ 
+                                    info.append(autores.ObtenerPorIndice(i));
+                                        if(i<autores.Tamaño()-1){
+                                            info.append(", ");
+                                        }    
+                                    }
+                                    info.append("\n\n");
                                     info.append("RESUMEN:\n").append(articulo.getResumen());
                                     javax.swing.JTextArea area = new javax.swing.JTextArea(info.toString());
                                     area.setLineWrap(true);
